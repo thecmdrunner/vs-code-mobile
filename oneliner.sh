@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-old=$(tput bold)
-normal=$(tput sgr0)
 
 boldtext() {
   echo -e "\033[1m$TEXT"
@@ -30,6 +28,7 @@ echo ''
 echo "Please accept the storage permission if you want to access personal files from VS Code."
 sleep 5
 termux-setup-storage
+echo "Please press ENTER if the setup doesn't proceed after 10 seconds"
 
 # need to update or it cant install anything
 echo ''
