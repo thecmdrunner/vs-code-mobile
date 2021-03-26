@@ -22,6 +22,7 @@ bluetext() {
 }
 
 # access phone's storage from termux to edit files files stored there from VS Code
+cd ~/
 echo ''
 TEXT=":: VS Code Android"; boldtext
 echo ''
@@ -47,20 +48,21 @@ echo ''
 # installs code-server globally
 echo ''
 TEXT=":: Now installing code-server from npm, this will take a while depending on your network speed..."; greentext
-sleep 4
+sleep 2
 echo ''
 echo ''
 npm install -g code-server
 echo ''
 TEXT="[✓] Installed code-server."; bluetext
 
-# ask if the user wants to run it NOW
-TEXT=":: If you want, you can start VS Code in your browser right now."; greentext
+# ask if the user wants to run it at startup
+TEXT=":: If you want, you can start VS Code automatically when termux starts."; greentext
+echo -e '   Do you want to enable auto-start?'
 echo ''
-read -p "Do you want to run code-server now?" userchoice
+read -p "Please enter your choice: [y/n]" userchoice
 echo ''
 
-code_server_pass=$(cat config.yaml | grep password | tr -d password:)
+code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
 
 if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" ]]; then
   echo ""
