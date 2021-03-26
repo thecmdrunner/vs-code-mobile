@@ -30,15 +30,19 @@ Open Termux and paste the command below
 curl -fsSL https://git.io/JYLt6 | bash
 ```
 
+## screenshot here
+
 ### Step 2: Integrating system storage
 
 If you want to be able to access your phone's storage from VS Code and Termux, accept the storage permission as shown below.
 
-
+## screenshot here
 
 ### Step 3: Starting the server
 
 Run `code-server` from the terminal to start VS Code server. You may also set it to auto-start when termux is opened, by putting `code-server` in your `~/.bashrc` or `~/.zshrc` file.
+
+## screenshot here
 
 #### Note: Password authentication is disabled by default, but you must edit the `~/.config/code-server/config.yaml` to enable password authentication and change the default password before running it in a production environment.
 
@@ -53,6 +57,11 @@ password: somestrongpassword
 
 Visit **http://127.0.0.1:8080** and enter your _password_ that you set in **Step 3**.
 
+## screenshot here
+
 ### Step 5: Further Setup and useful tweaks
 
+## screenshot here
+
  - Select a **dark theme** by going to  ⚙️  -> **Color Theme** -> **Dark/Dark+**
+
