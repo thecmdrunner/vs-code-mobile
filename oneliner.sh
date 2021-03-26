@@ -32,7 +32,7 @@ createConfig() {
   echo 'bind-addr: 127.0.0.1:8080' >> configfile 
   echo 'auth: none' >> configfile 
   echo 'password: 012345678901234567890123 # PLEASE CHANGE THIS PASSWORD' >> configfile 
-  echo 'cert: true' >> configfile 
+  echo 'cert: false' >> configfile 
 }
 
 # access phone's storage from termux to edit files files stored there from VS Code
@@ -63,6 +63,7 @@ echo ''
 echo ''
 TEXT=":: Now installing code-server from npm,"; greentext
 TEXT="This will take time depending on your network speed..."; greentext
+createConfig
 echo ''
 echo ''
 npm install -g code-server
