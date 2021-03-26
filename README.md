@@ -6,7 +6,7 @@ It can be used in the phone's browser or any other device on the same network.
 
 ### Pre-Requisites
 
- - A phone running — 
+- A phone running — 
   - Android
   - Linux
   - iOS
