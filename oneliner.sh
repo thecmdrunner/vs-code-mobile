@@ -59,18 +59,44 @@ TEXT="[✓] Installed code-server."; bluetext
 TEXT=":: If you want, you can start VS Code automatically when termux starts."; greentext
 echo -e '   Do you want to enable auto-start?'
 echo ''
-read -p "Please enter your choice: [y/n]" userchoice
+read -p "Please enter your choice [y/n]: " autostartchoice
 echo ''
 
+if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" || $userchoice == "Y" ]]; then
+  echo ""
+  echo code-server >> ~/.bashrc
+  echo ''
+elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
+  echo ''
+  TEXT="Okay, you can run VS Code by just typing code-server."; bluetext
+  echo ''
+  echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser, and enter the Password:$code_server_pass"
+  echo ''
+  exit 1
+else 
+  echo ''
+  echo "Invalid Option, exiting."
+  echo ''
+  TEXT="You can run VS Code by just typing code-server."; bluetext
+  echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser, and enter the Password:$code_server_pass"
+  echo ''
+  exit 1
+fi
+
+echo ''
+echo "[✓] Setup Finished."
+read -p 'Do you want to start code-server now? [Y/n] : ' userchoice
+
+# define code-server config file with only password processed 
 code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
 
-if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" ]]; then
+if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" || $userchoice == "Y" ]]; then
   echo ""
   TEXT=":: Running Code Server, with Password:$code_server_pass"; bluetext
   echo ''
   sleep 4
   code-server
-elif [[ $userchoice == "n" || $userchoice == "no" ]]; then
+elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
   echo ''
   TEXT="Okay, you can run VS Code by just typing code-server."; bluetext
   echo ''
