@@ -109,7 +109,8 @@ read -p '[?] Do you want to start code-server now? [Y/n] : ' userchoice
 if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" || $userchoice == "Y" ]]; then
   echo ""
   TEXT=":: Running Code Server..."; greentext
-  echo ''
+  echo ''   
+  echo ":: Visit http://127.0.0.1:8080 from your browser."
   sleep 2
   code-server
 elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then

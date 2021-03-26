@@ -108,8 +108,9 @@ debian_setup() {
 
 unknown_distro() {
 
-  TEXT="Your System possibly isn't Debian/Fedora/Arch, so make sure to install the Node.JS and yarn through your package manager."; bluetext
-  echo ""
+  TEXT="Your System possibly isn't Debian/Fedora/Arch, so make sure to install the Node.JS and yarn through your package manager."; yellowtext
+  TEXT="After installing, run the following command;"; yellowtext
+  echo ''
   TEXT""
   byee;
 
@@ -138,47 +139,25 @@ echo ''
 TEXT="[✓] Installed code-server."; greentext
 echo ''
 
-# ask if the user wants to run it at startup
-echo -e ":: If you want, you can start VS Code automatically when termux starts."
-echo ''
-TEXT='[?] Do you want to enable auto-start?'; yellowtext
-echo ''
-read -p "Please enter your choice [Y/N]: " autostartchoice
-echo ''
-
 # define code-server config file with only password processed 
 #code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
-
-# Asks the user about auto-start
-
-if [[ $autostartchoice == "y" || $autostartchoice == "ye" || $autostartchoice == "yes" || $autostartchoice == "Y" ]]; then
-  echo ""
-  echo code-server >> ~/.bashrc
-  echo ''
-else 
-  echo ''
-  TEXT="Invalid Option, exiting."; redtext
-  echo ''
-  TEXT="You can run VS Code by just typing code-server."; greentext
-  echo ''
-  echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser."
-  echo ''
-  exit 1
-fi
 
 echo ''
 echo "[✓] Setup Finished."
 echo ''
 
 # Asks the user whether to start code-server or exit
+echo ''
 read -p '[?] Do you want to start code-server now? [Y/n] : ' userchoice
 
 if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" || $userchoice == "Y" ]]; then
   echo ""
   TEXT=":: Running Code Server..."; greentext
   echo ''
+  echo ":: Visit http://127.0.0.1:8080 from your browser."
   sleep 2
   code-server
+
 elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
   echo ''
   TEXT="Okay, you can run VS Code by just typing code-server"; greentext
@@ -186,6 +165,7 @@ elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
   echo ":: Run code-server & visit http://127.0.0.1:8080 from your browser."
   echo ''
   exit 1
+
 else 
   echo ''
   TEXT="Invalid Option, exiting."; redtext
