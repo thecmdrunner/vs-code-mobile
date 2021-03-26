@@ -51,8 +51,8 @@ password: somestrongpassword
 
 ### Step 4: Run VS Code in Browser
 
-Visit http://127.0.0.1:8080 and enter your _password_ that you set in **Step 3**.
+Visit **http://127.0.0.1:8080** and enter your _password_ that you set in **Step 3**.
 
 ### Step 5: Further Setup and useful tweaks
 
- - Select a **dark theme** by going to ⚙️  -> **Color Theme** -> **Dark/Dark+**
+ - Select a **dark theme** by going to  ⚙️  -> **Color Theme** -> **Dark/Dark+**
