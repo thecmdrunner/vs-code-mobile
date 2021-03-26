@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#This script: curl -fsSL https://git.io/JYLt6 | bash
+
 
 boldtext() {
   echo -e "\033[1m$TEXT"
@@ -33,13 +35,13 @@ echo "Please press ENTER if the setup doesn't proceed after 10 seconds"
 
 # need to update or it cant install anything
 echo ''
-TEXT=":: Updating Repositories"; bluetext
+TEXT=":: Updating Repositories"; greemtext
 echo ''
 apt update
 
 # installs node and npm
 echo ''
-TEXT=":: Installing Node.Js, npm and yarn."; bluetext
+TEXT=":: Installing Node.Js, npm and yarn."; greentext
 echo ''
 apt install -y nodejs yarn
 clear
@@ -47,26 +49,28 @@ echo ''
 
 # installs code-server globally
 echo ''
-TEXT=":: Now installing code-server from npm, this will take a while depending on your network speed..."; greentext
-sleep 2
+TEXT=":: Now installing code-server from npm."; greentext
+TEXT="This will take time depending on your network speed..."; greentext
 echo ''
 echo ''
 npm install -g code-server
 echo ''
-TEXT="[✓] Installed code-server."; bluetext
+TEXT="[✓] Installed code-server."; greentext
+echo ''
 
 # ask if the user wants to run it at startup
-TEXT=":: If you want, you can start VS Code automatically when termux starts."; greentext
-echo -e '   Do you want to enable auto-start?'
+echo -e ":: If you want, you can start VS Code automatically when termux starts."
 echo ''
-read -p "Please enter your choice [y/n]: " autostartchoice
+echo 'Do you want to enable auto-start?'
+echo ''
+read -p "Please enter your choice [Y/N]: " autostartchoice
 echo ''
 
-if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" || $userchoice == "Y" ]]; then
+if [[ $autostartchoice == "y" || $autostartchoice == "ye" || $autostartchoice == "yes" || $autostartchoice == "Y" ]]; then
   echo ""
   echo code-server >> ~/.bashrc
   echo ''
-elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
+elif [[ $autostartchoice == "n" || $autostartchoice == "no" || $autostartchoice == "N" ]]; then
   echo ''
   TEXT="Okay, you can run VS Code by just typing code-server."; bluetext
   echo ''
@@ -75,7 +79,7 @@ elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
   exit 1
 else 
   echo ''
-  echo "Invalid Option, exiting."
+  TEXT="Invalid Option, exiting."; redtext
   echo ''
   TEXT="You can run VS Code by just typing code-server."; bluetext
   echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser, and enter the Password:$code_server_pass"
@@ -100,12 +104,13 @@ elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
   echo ''
   TEXT="Okay, you can run VS Code by just typing code-server."; bluetext
   echo ''
-  echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser, and enter the Password:$code_server_pass"
+  echo ":: Run code-server & visit http://127.0.0.1:8080 from your browser, and enter the Password:$code_server_pass"
   echo ''
   exit 1
 else 
   echo ''
-  echo "Invalid Option, exiting."
+  TEXT="Invalid Option, exiting."; redtext
+  echo ''
   TEXT="You can run VS Code by just typing code-server."; bluetext
   echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser, and enter the Password:$code_server_pass"
   echo ''
