@@ -58,13 +58,13 @@ fi
 echo ''
 TEXT=":: Updating Repositories"; greentext
 echo ''
-apt update && apt upgrade -y
+apt -qy update 
 
 # installs node and npm
 echo ''
 TEXT=":: Installing Node.Js, npm and yarn."; greentext
 echo ''
-apt -o Dpkg::Options::=--force-confnew install -yq git nodejs yarn
+apt -yq -o Dpkg::Options::=--force-confnew install git nodejs yarn
 clear
 echo ''
 
