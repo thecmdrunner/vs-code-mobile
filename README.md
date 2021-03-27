@@ -10,12 +10,12 @@ It can be used in the phone's browser or any other device on the same network.
 - A phone running either - 
   - Android
   - Linux
-  - iOS (untested)
+  - iOS/iPadOS (untested)
 
 - Terminal emulator 
   - **Android**: Termux from [F-Droid](https://f-droid.org/en/packages/com.termux/) or [Play Store](https://play.google.com/store/apps/details?id=com.termux).
   - **Linux**: Any terminal app works good.
-  - **iOS**: [iSH](https://ish.app) from [App Store](https://apps.apple.com/us/app/ish-shell/id1436902243) or [AltStore](https://ish.app/altstore).
+  - **iOS/iPadOS**: [iSH](https://ish.app) from [App Store](https://apps.apple.com/us/app/ish-shell/id1436902243) or [AltStore](https://ish.app/altstore).
 
 - A network connection (VPN might cause problems when accessing via another device on the network)
 - Common Sense (optional)

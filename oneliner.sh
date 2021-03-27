@@ -71,7 +71,7 @@ arch_setup() {
   TEXT=":: Installing Node.Js, npm and yarn."; greentext
   echo ""
   echo ""
-  sudo pacman -S --noconfirm git curl nodejs yarn 
+  sudo pacman -S --noconfirm git curl nodejs npm yarn 
   echo ""
   TEXT="[✓] Setup Finished!"; greentext
 
@@ -88,7 +88,7 @@ fedora_setup() {
   echo ""
   echo ""
   echo ""
-  sudo dnf -y install git curl nodejs yarn  
+  sudo dnf -y install git curl nodejs npm yarn  
   echo ""
   TEXT="[✓] Setup Finished!"; greentext
 
@@ -104,7 +104,7 @@ debian_setup() {
   TEXT=":: Installing Node.Js, npm and yarn."; greentext
   echo ""
   echo ""
-  sudo apt install -y git curl nodejs yarn  
+  sudo apt install -y git curl nodejs npm yarn
   echo ""
   TEXT="[✓] Setup Finished!"; greentext
 
@@ -114,7 +114,7 @@ debian_setup() {
 
 unknown_distro() {
 
-  TEXT="Your System possibly isn't Debian/Fedora/Arch, so make sure to install the Node.JS and yarn through your package manager."; yellowtext
+  TEXT="Your System likely isn't Debian/Fedora/Arch, so make sure to install the Node.JS and yarn through your package manager."; yellowtext
   TEXT="After installing, run the following command;"; yellowtext
   echo ''
   TEXT""
