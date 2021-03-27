@@ -45,7 +45,7 @@ Run `code-server` from the terminal to start VS Code server. You may also set it
 ## screenshot here
 
 #### Note: Password authentication is disabled by default. 
-#### You must edit the `~/.config/code-server/config.yaml` to enable password authentication and change the default password before running it in a production environment.
+#### Edit the `~/.config/code-server/config.yaml` to enable password authentication as shown below and change the default password before running it in a production environment.
 
 ```yaml
 ...
