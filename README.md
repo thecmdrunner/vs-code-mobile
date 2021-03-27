@@ -10,7 +10,7 @@ It can be used in the phone's browser or any other device on the same network.
 - A phone running either - 
   - Android
   - Linux
-  - iOS
+  - iOS (untested)
 
 - Terminal emulator 
   - **Android**: Termux from [F-Droid](https://f-droid.org/en/packages/com.termux/) or [Play Store](https://play.google.com/store/apps/details?id=com.termux).
@@ -40,11 +40,12 @@ If you want to be able to access your phone's storage from VS Code and Termux, a
 
 ### Step 3: Starting the server
 
-Run `code-server` from the terminal to start VS Code server. You may also set it to auto-start when termux is opened, by putting `code-server` in your `~/.bashrc` or `~/.zshrc` file.
+Run `code-server` from the terminal to start VS Code server. You may also set it to auto-start when termux is opened, by putting `code-server` at the end of your `~/.bashrc` or `~/.zshrc` file.
 
 ## screenshot here
 
-#### Note: Password authentication is disabled by default, but you must edit the `~/.config/code-server/config.yaml` to enable password authentication and change the default password before running it in a production environment.
+#### Note: Password authentication is disabled by default. 
+#### You must edit the `~/.config/code-server/config.yaml` to enable password authentication and change the default password before running it in a production environment.
 
 ```yaml
 ...
