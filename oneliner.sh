@@ -110,7 +110,23 @@ debian_setup() {
 
 }
 
-# Fallback: Unknown Distro detected. Tells the user to install dependencies himself and checks if the system uses systemd init, then exits.
+# Alpine Linux Setup (for iSH on iOS)
+
+alpine_setup() {
+
+  echo ""
+  TEXT="[✓] BASE SYSTEM: ALPINE"; greentext
+  echo ""
+  TEXT=":: Installing Node.Js, npm and yarn."; greentext
+  echo ""
+  echo ""
+  apk add git curl nodejs npm yarn
+  echo ""
+  TEXT="[✓] Setup Finished!"; greentext
+
+}
+
+# Fallback: Unknown Distro detected. Tells the user to install dependencies and exits.
 
 unknown_distro() {
 
@@ -132,6 +148,21 @@ createConfig() {
   echo 'cert: false' >> configfile 
 }
 
+# install dependencies depending on the distro
+install_all() {
+  if [[ -f /usr/bin/makepkg ]] # Present in Arch
+  then
+    arch_setup
+  elif [[ -f /usr/bin/rpm ]] # Present in Fedora
+  then
+   fedora_setup
+  elif [[ -f /usr/bin/dpkg ]] # Present in Debian
+  then
+    debian_setup
+  else # Resorts to fallback
+    unknown_distro
+  fi
+}
 
 # installs code-server globally
 echo ''
@@ -145,14 +176,15 @@ echo ''
 TEXT="[✓] Installed code-server."; greentext
 echo ''
 
-# define code-server config file with only password processed 
-#code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
-
 echo ''
 echo "[✓] Setup Finished."
 echo ''
 
 # Asks the user whether to start code-server or exit
+
+# define code-server config file with only password processed 
+#code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
+
 echo ''
 read -p '[?] Do you want to start code-server now? [Y/n] : ' userchoice
 

@@ -44,7 +44,7 @@ TEXT="[✓] BASE SYSTEM: ANDROID"; greentext
 # access phone's storage from termux to edit files files stored there from VS Code
 cd ~/
 echo ''
-TEXT=":: VS Code Android"; boldtext
+TEXT=":: VS Code Mobile"; boldtext
 echo ''
 
 # Enable local storage access in ~/storage
@@ -82,64 +82,13 @@ echo ''
 TEXT="[✓] Installed code-server."; greentext
 echo ''
 
-# ask if the user wants to run it at startup
-echo -e ":: If you want, you can start VS Code automatically when termux starts."
-echo ''
-TEXT='[?] Do you want to enable auto-start?'; yellowtext
-echo ''
-read -p "Please enter your choice [Y/N]: " autostartchoice
-echo ''
-
 # define code-server config file with only password processed 
 #code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
-
-# Asks the user about auto-start
-
-if [[ $autostartchoice == "y" || $autostartchoice == "ye" || $autostartchoice == "yes" || $autostartchoice == "Y" ]]; then
-  echo ""
-  echo code-server >> ~/.bashrc
-  echo ''
-else 
-  echo ''
-  TEXT="Invalid Option, exiting."; redtext
-  echo ''
-  TEXT="You can run VS Code by just typing code-server."; greentext
-  echo ''
-  echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser."
-  echo ''
-  exit 1
-fi
 
 echo ''
 echo "[✓] Setup Finished."
 echo ''
 
-# Asks the user whether to start code-server or exit
-read -p '[?] Do you want to start code-server now? [Y/n] : ' userchoice
-
-if [[ $userchoice == "y" || $userchoice == "ye" || $userchoice == "yes" || $userchoice == "Y" ]]; then
-  echo ""
-  TEXT=":: Running Code Server..."; greentext
-  echo ''   
-  echo ":: Visit http://127.0.0.1:8080 from your browser."
-  sleep 2
-  code-server
-elif [[ $userchoice == "n" || $userchoice == "no" || $userchoice == "N" ]]; then
-  echo ''
-  TEXT="Okay, you can run VS Code by just typing code-server"; greentext
-  echo ''
-  echo ":: Run code-server & visit http://127.0.0.1:8080 from your browser."
-  echo ''
-  exit 1
-else 
-  echo ''
-  TEXT="Invalid Option, exiting."; redtext
-  echo ''
-  TEXT="You can run VS Code by just typing code-server."; greentext
-  echo ''
-  echo ":: After you run code-server, visit http://127.0.0.1:8080 from your browser."
-  echo ''
-  exit 1
-fi
-
+# Tells the user how to start code-server
+TEXT='[!] To start, run code-server & visit http://127.0.0.1:8080 from your browser.'; yellowtext 
 

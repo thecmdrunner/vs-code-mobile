@@ -66,3 +66,8 @@ Visit **http://127.0.0.1:8080** and enter your _password_ that you set in **Step
 
  - Select a **dark theme** by going to  ⚙️  -> **Color Theme** -> **Dark/Dark+**
 
+
+### To-Do:
+ - Make an all-in-one script
+ - Let user input password right after install
+ - Enable https
