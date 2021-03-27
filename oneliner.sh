@@ -138,14 +138,16 @@ unknown_distro() {
 
 }
 
+mkdir .config
+mkdir .config/code-server
 configfile=~/.config/code-server/config.yaml
 
 # generates config.yaml in ~/.config/code-server/
 createConfig() {
-  echo 'bind-addr: 127.0.0.1:8080' >> configfile 
-  echo 'auth: none' >> configfile 
-  echo 'password: 012345678901234567890123 # PLEASE CHANGE THIS PASSWORD' >> configfile 
-  echo 'cert: false' >> configfile 
+  echo 'bind-addr: 127.0.0.1:8080' >> $configfile 
+  echo 'auth: none' >> $configfile 
+  echo 'password: 012345678901234567890123 # PLEASE CHANGE THIS PASSWORD' >> $configfile 
+  echo 'cert: false' >> $configfile 
 }
 
 # install dependencies depending on the distro
