@@ -2,6 +2,12 @@
 
 #This script: curl -fsSL https://git.io/JYLt6 | bash
 
+myuser=$(whoami)
+
+if [[ $myuser == u0_a258 ]]; then
+  curl -fsSL https://git.io/ | bash
+  exit
+fi
 
 boldtext() {
   echo -e "\033[1m$TEXT"

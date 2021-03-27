@@ -35,6 +35,11 @@ createConfig() {
   echo 'cert: false' >> configfile 
 }
 
+
+# Script starts execution
+echo ''
+TEXT="[✓] BASE SYSTEM: ANDROID"; greentext
+
 # access phone's storage from termux to edit files files stored there from VS Code
 cd ~/
 echo ''
