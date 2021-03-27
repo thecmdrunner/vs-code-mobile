@@ -24,6 +24,8 @@ bluetext() {
   echo -e "\x1b[1;34m$TEXT\e[0m"
 }
 
+mkdir .config
+mkdir .config/code-server
 configfile=~/.config/code-server/config.yaml
 
 # generates config.yaml in ~/.config/code-server/
