@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-#This script: curl -fsSL https://git.io/JYLt6 | bash
-
+#This script: curl -fsSL https://git.io/JY37R | bash
 
 boldtext() {
   echo -e "\033[1m$TEXT"

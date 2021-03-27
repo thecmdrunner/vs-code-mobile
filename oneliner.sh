@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-#This script: curl -fsSL https://git.io/JYLt6 | bash
+#This script: curl -fsSL https://git.io/JY372 | bash
 
 myuser=$(whoami)
 
 if [[ $myuser == u0_a258 ]]; then
-  curl -fsSL https://git.io/ | bash
+  curl -fsSL https://git.io/JY37R | bash
   exit
 fi
 

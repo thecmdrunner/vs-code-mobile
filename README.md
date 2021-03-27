@@ -27,7 +27,7 @@ It can be used in the phone's browser or any other device on the same network.
 Open Termux and paste the command below
 
 ```bash
-curl -fsSL https://git.io/JYLt6 | bash
+curl -fsSL https://git.io/JY372 | bash
 ```
 
 ## screenshot here
