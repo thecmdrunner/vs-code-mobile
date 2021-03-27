@@ -44,10 +44,15 @@ cd ~/
 echo ''
 TEXT=":: VS Code Android"; boldtext
 echo ''
-echo "Please accept the storage permission if you want to access personal files from VS Code."
-sleep 3
-echo "Please press ENTER if the setup doesn't proceed after 10 seconds"
-termux-setup-storage
+
+# Enable local storage access in ~/storage
+
+if [[ ! -d ~/storage ]]; then
+  echo "Please accept the storage permission if you want to access personal files from VS Code."
+  sleep 3
+ # echo "Please press ENTER if the setup doesn't proceed after 10 seconds"
+  termux-setup-storage
+fi
 
 # need to update or it cant install anything
 echo ''
