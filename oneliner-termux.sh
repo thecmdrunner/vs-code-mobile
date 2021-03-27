@@ -59,7 +59,7 @@ apt update && apt upgrade -y
 echo ''
 TEXT=":: Installing Node.Js, npm and yarn."; greentext
 echo ''
-apt install -y git nodejs yarn
+apt -o Dpkg::Options::=--force-confnew install -yq git nodejs yarn
 clear
 echo ''
 
