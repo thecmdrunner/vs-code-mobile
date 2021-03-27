@@ -104,7 +104,7 @@ debian_setup() {
   TEXT=":: Installing Node.Js, npm and yarn."; greentext
   echo ""
   echo ""
-  sudo apt install -y git curl nodejs npm yarn
+  sudo apt -yq -o Dpkg::Options::=--force-confnew install git nodejs yarn
   echo ""
   TEXT="[✓] Setup Finished!"; greentext
 
@@ -173,7 +173,13 @@ TEXT="This will take time depending on your network speed..."; greentext
 createConfig
 echo ''
 echo ''
-npm install -g code-server
+
+if [[ $myuser==u0_a258 ]]; then
+  npm install -g code-server
+else
+  sudo npm install -g code-server
+fi
+
 echo ''
 TEXT="[✓] Installed code-server."; greentext
 echo ''

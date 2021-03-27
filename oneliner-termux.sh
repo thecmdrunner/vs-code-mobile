@@ -90,5 +90,10 @@ echo "[✓] Setup Finished."
 echo ''
 
 # Tells the user how to start code-server
-TEXT='[!] To start, run code-server & visit http://127.0.0.1:8080 from your browser.'; yellowtext 
+echo ''
+TEXT='[!] To start, run `code-server`'; yellowtext 
+echo ''
+TEXT='[!] Then visit http://127.0.0.1:8080 from your browser'; yellowtext 
+echo ''
+echo ''
 
