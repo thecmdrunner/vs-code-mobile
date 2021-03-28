@@ -61,6 +61,17 @@ config_stuff() {
 
 ### PRE-DEFINED OPERATIONS
 
+# greeting function
+
+hiii() {
+
+  echo ''
+  TEXT="\033[1m:: VS Code Mobile"; greentext
+  echo ''
+
+}
+
+
 # exit function
 
 byee() {
@@ -77,6 +88,8 @@ byee() {
 android_setup() {
 
   cd ~/
+  echo ''
+  TEXT="[✓] BASE SYSTEM: ANDROID"; greentext
   echo ''
   if [[ ! -d ~/storage ]]; then
     echo "Please accept the storage permission if you want to access personal files from VS Code."
@@ -201,13 +214,11 @@ install_vs() {
   echo ''
   TEXT=":: Now installing code-server from npm,"; greentext
   TEXT="This will take time depending on your network speed..."; greentext
-  createConfig
   echo ''
   echo ''
   
   if [[ $env_termux='yes' ]]; then
-    #npm install -g code-server
-    echo lol
+    npm install -g code-server
   else
     sudo npm install -g code-server
   fi
@@ -233,10 +244,10 @@ instruct_user() {
 
 }
 
-
-install_all
-config_stuff
-install_vs
-instruct_user
-
+hiii                # greeting
+install_all         # installs dependencies
+config_stuff        # config file stuff
+install_vs          # installs code-server
+instruct_user       # basic instructions for the user
+byee                # exits
 
