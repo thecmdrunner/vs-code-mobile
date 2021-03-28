@@ -24,9 +24,6 @@ bluetext() {
   echo -e "\x1b[1;34m$TEXT\e[0m"
 }
 
-mkdir .config
-mkdir .config/code-server
-configfile=~/.config/code-server/config.yaml
 
 # generates config.yaml in ~/.config/code-server/
 createConfig() {
@@ -41,7 +38,6 @@ createConfig() {
 echo ''
 TEXT="[✓] BASE SYSTEM: ANDROID"; greentext
 
-# access phone's storage from termux to edit files files stored there from VS Code
 cd ~/
 echo ''
 TEXT=":: VS Code Mobile"; boldtext

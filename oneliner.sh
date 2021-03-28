@@ -4,10 +4,10 @@
 
 myuser=$(whoami)
 
-if [[ $myuser == u0_a258 ]]; then
-  curl -fsSL https://git.io/JY37R | bash
-  exit
-fi
+#if [[ $myuser == u0_a258 ]]; then
+#  curl -fsSL https://git.io/JY37R | bash
+#  exit
+#fi
 
 boldtext() {
   echo -e "\033[1m$TEXT"
@@ -32,20 +32,17 @@ bluetext() {
 }
 
 
-echo ''
-cd ~/
-touch ~/quick-vm.log
-if [[ -f ~/quick-vm.log ]]
-then
-  echo "Logs for Quick-VM Project are written here. Link: https://github.com/gamerhat18/quick-vm" >> ~/quick-vm.log
-  if [[ $EUID -ne 0 ]]; then
-    echo " Not running this script as root. " >>  ~/quick-vm.log
-  fi
-else
-  TEXT="Filesystem is READ-ONLY. Errors may not be logged."; redtext
-  TEXT="YOU MAY CONTINUE, BUT MIGHT ENCOUNTER ERRORS."; redtext
+# creates config folder and file
+# and interprets the password if file already exists
+if [[ ! -d ~/.config/code-server ]]; then
+  mkdir -p ~/.config/code-server
 fi
-echo ''
+
+if [[ ! -f ~/.config/code-server/config.yaml ]]; then
+  touch ~/.config/code-server/config.yaml
+fi
+
+configfile=~/.config/code-server/config.yaml
 
 
 ### PRE-DEFINED OPERATIONS
@@ -58,6 +55,27 @@ byee() {
   TEXT=":: Exiting, Bye!"; greentext
   echo ""
   exit
+
+}
+
+# Android Setup
+
+android_setup() {
+
+  cd ~/
+  echo ''
+  if [[ ! -d ~/storage ]]; then
+    echo "Please accept the storage permission if you want to access personal files from VS Code."
+    sleep 3
+    #echo "Please press ENTER if the setup doesn't proceed after 10 seconds"
+    termux-setup-storage
+  fi
+  echo ''
+  TEXT=":: Installing Node.Js, npm and yarn."; greentext
+  echo ''
+  apt -qy update && apt -yq -o Dpkg::Options::=--force-confnew install git nodejs yarn
+  clear
+  echo ''
 
 }
 
@@ -138,9 +156,6 @@ unknown_distro() {
 
 }
 
-mkdir .config
-mkdir .config/code-server
-configfile=~/.config/code-server/config.yaml
 
 # generates config.yaml in ~/.config/code-server/
 createConfig() {
@@ -152,47 +167,82 @@ createConfig() {
 
 # install dependencies depending on the distro
 install_all() {
-  if [[ -f /usr/bin/makepkg ]] # Present in Arch
-  then
+
+  if [[ $myuser == u0_a258 ]]; then
+    android_setup
+  elif [[ -f /usr/bin/makepkg ]]; then # Present in Arch
     arch_setup
-  elif [[ -f /usr/bin/rpm ]] # Present in Fedora
-  then
+  elif [[ -f /usr/bin/rpm ]]; then # Present in Fedora
    fedora_setup
-  elif [[ -f /usr/bin/dpkg ]] # Present in Debian
-  then
+  elif [[ -f /usr/bin/dpkg ]]; then # Present in Debian
     debian_setup
   else # Resorts to fallback
     unknown_distro
+    exit 1
   fi
+
 }
 
 # installs code-server globally
-echo ''
-TEXT=":: Now installing code-server from npm,"; greentext
-TEXT="This will take time depending on your network speed..."; greentext
-createConfig
-echo ''
-echo ''
+install-vs() {
 
-if [[ $myuser==u0_a258 ]]; then
-  npm install -g code-server
-else
-  sudo npm install -g code-server
-fi
+  echo ''
+  TEXT=":: Now installing code-server from npm,"; greentext
+  TEXT="This will take time depending on your network speed..."; greentext
+  createConfig
+  echo ''
+  echo ''
+  
+  if [[ $myuser==u0_a258 ]]; then
+    npm install -g code-server
+  else
+    sudo npm install -g code-server
+  fi
 
-echo ''
-TEXT="[✓] Installed code-server."; greentext
-echo ''
+  echo ''
+  TEXT="[✓] Installed code-server."; greentext
+  echo ''
+  echo ''
+  echo "[✓] Setup Finished."
+  echo ''
 
-echo ''
-echo "[✓] Setup Finished."
-echo ''
-
-# Asks the user whether to start code-server or exit
+}
 
 # define code-server config file with only password processed 
 #code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##############################################################
 echo ''
 read -p '[?] Do you want to start code-server now? [Y/n] : ' userchoice
 
