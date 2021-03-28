@@ -205,8 +205,9 @@ install_vs() {
   echo ''
   echo ''
   
-  if [[ $myuser==u0_a258 ]]; then
-    npm install -g code-server
+  if [[ $env_termux='yes' ]]; then
+    #npm install -g code-server
+    echo lol
   else
     sudo npm install -g code-server
   fi
