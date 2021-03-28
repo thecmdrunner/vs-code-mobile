@@ -222,7 +222,7 @@ install_vs() {
 }
 
 
-instuct_user() {
+instruct_user() {
 
   echo ''
   TEXT='[!] To start, run `code-server`'; yellowtext
