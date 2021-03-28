@@ -2,12 +2,10 @@
 
 #This script: curl -fsSL https://git.io/JY372 | bash
 
-myuser=$(whoami)
 
-#if [[ $myuser == u0_a258 ]]; then
-#  curl -fsSL https://git.io/JY37R | bash
-#  exit
-#fi
+if [[ -d /data/data/com.termux ]]; then
+  env_termux='yes'
+fi
 
 boldtext() {
   echo -e "\033[1m$TEXT"
@@ -34,16 +32,32 @@ bluetext() {
 
 # creates config folder and file
 # and interprets the password if file already exists
-if [[ ! -d ~/.config/code-server ]]; then
-  mkdir -p ~/.config/code-server
-fi
-
-if [[ ! -f ~/.config/code-server/config.yaml ]]; then
-  touch ~/.config/code-server/config.yaml
-fi
 
 configfile=~/.config/code-server/config.yaml
 
+config_stuff() {
+
+  if [[ ! -d ~/.config/code-server ]]; then
+    mkdir -p ~/.config/code-server
+  fi
+
+  if [[ ! -f ~/.config/code-server/config.yaml ]]; then
+    touch ~/.config/code-server/config.yaml
+
+    # generates config.yaml in ~/.config/code-server/
+    echo 'bind-addr: 127.0.0.1:8080' >> $configfile 
+    echo 'auth: none' >> $configfile 
+    echo 'password: 012345678901234567890123 # PLEASE CHANGE THIS PASSWORD' >> $configfile 
+    echo 'cert: false' >> $configfile 
+
+  elif [[ -f ~/.config/code-server/config.yaml ]]; then
+    # define processed password from config.yaml 
+    code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
+    password_exists='yes'
+  fi
+  
+
+}
 
 ### PRE-DEFINED OPERATIONS
 
@@ -90,8 +104,8 @@ arch_setup() {
   echo ""
   echo ""
   sudo pacman -S --noconfirm git curl nodejs npm yarn 
-  echo ""
-  TEXT="[✓] Setup Finished!"; greentext
+  clear
+  echo ''
 
 }
 
@@ -107,8 +121,8 @@ fedora_setup() {
   echo ""
   echo ""
   sudo dnf -y install git curl nodejs npm yarn  
-  echo ""
-  TEXT="[✓] Setup Finished!"; greentext
+  clear
+  echo ''
 
 }
 
@@ -123,8 +137,8 @@ debian_setup() {
   echo ""
   echo ""
   sudo apt -yq -o Dpkg::Options::=--force-confnew install git nodejs yarn
-  echo ""
-  TEXT="[✓] Setup Finished!"; greentext
+  clear
+  echo ''
 
 }
 
@@ -139,8 +153,8 @@ alpine_setup() {
   echo ""
   echo ""
   apk add git curl nodejs npm yarn
-  echo ""
-  TEXT="[✓] Setup Finished!"; greentext
+  clear
+  echo ''
 
 }
 
@@ -156,27 +170,25 @@ unknown_distro() {
 
 }
 
-
-# generates config.yaml in ~/.config/code-server/
-createConfig() {
-  echo 'bind-addr: 127.0.0.1:8080' >> $configfile 
-  echo 'auth: none' >> $configfile 
-  echo 'password: 012345678901234567890123 # PLEASE CHANGE THIS PASSWORD' >> $configfile 
-  echo 'cert: false' >> $configfile 
-}
-
 # install dependencies depending on the distro
 install_all() {
-
-  if [[ $myuser == u0_a258 ]]; then
+  
+  if [[ $env_termux == 'yes' ]]; then     # Present in Termux
     android_setup
-  elif [[ -f /usr/bin/makepkg ]]; then # Present in Arch
+
+  elif [[ -f /usr/bin/apk ]]; then        # Present in Alpine
+    alpine_setup
+
+  elif [[ -f /usr/bin/makepkg ]]; then    # Present in Arch
     arch_setup
-  elif [[ -f /usr/bin/rpm ]]; then # Present in Fedora
+
+  elif [[ -f /usr/bin/rpm ]]; then        # Present in Fedora
    fedora_setup
-  elif [[ -f /usr/bin/dpkg ]]; then # Present in Debian
+
+  elif [[ -f /usr/bin/dpkg ]]; then       # Present in Debian
     debian_setup
-  else # Resorts to fallback
+
+  else                                    # Resorts to fallback
     unknown_distro
     exit 1
   fi
@@ -184,7 +196,7 @@ install_all() {
 }
 
 # installs code-server globally
-install-vs() {
+install_vs() {
 
   echo ''
   TEXT=":: Now installing code-server from npm,"; greentext
@@ -208,12 +220,23 @@ install-vs() {
 
 }
 
-# define code-server config file with only password processed 
-#code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
+
+instuct_user() {
+
+  echo ''
+  TEXT='[!] To start, run `code-server`'; yellowtext
+  echo ''
+  TEXT='[!] Then visit http://127.0.0.1:8080 from your browser'; yellowtext
+  echo ''
+  echo ''
+
+}
 
 
-
-
+install_all
+config_stuff
+install_vs
+instruct_user
 
 
 
