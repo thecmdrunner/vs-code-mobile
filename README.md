@@ -64,6 +64,10 @@ Visit **http://127.0.0.1:8080** and enter your _password_ that you set in **Step
 
 ## screenshot here
 
+### Step 6: Further Setup and useful tweaks
+
+## screenshot here
+
  - Select a **Dark theme** by going to  ⚙️  -> **Color Theme** -> **Dark/Dark+**
  - Access local storage easily
 
