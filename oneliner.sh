@@ -40,10 +40,6 @@ configfile=~/.config/code-server/config.yaml
 
 config_stuff() {
 
-  # define processed password from config.yaml 
-  SERVERPASS=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
-  AUTHTYPE=$(cat ~/.config/code-server/config.yaml | grep auth | tr -d 'auth: ')
-
   if [[ ! -d ~/.config/code-server ]]; then
     mkdir -p ~/.config/code-server
   fi
@@ -65,6 +61,12 @@ config_stuff() {
   fi
 
 }
+
+
+ # define processed password from config.yaml 
+ SERVERPASS=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
+ AUTHTYPE='$(cat ~/.config/code-server/config.yaml | grep auth | tr -d 'auth: ')'
+
 
 ### PRE-DEFINED OPERATIONS
 
@@ -219,8 +221,8 @@ install_all() {
 install_vs() {
 
   echo ''
-  TEXT=":: Now installing code-server from npm,"; greentext
-  TEXT="This will take time depending on your network speed..."; greentext
+  TEXT=":: Installing code-server via npm"; greentext
+  TEXT="   This will take time depending on the network speed..."; greentext
   echo ''
   echo ''
   
@@ -246,16 +248,6 @@ instruct_user() {
   TEXT='[!] To start, run `code-server`'; yellowtext
   echo ''
   TEXT='[!] Then visit http://127.0.0.1:8080 from your browser'; yellowtext
-  echo ''
-  #if [[ $auth_type=='password' ]]; then
-  if [[ $password_exists=='yes' && $AUTHTYPE=='password' ]]; then
-    TEXT='[!] Your Password is:'$SERVERPASS; greentext
-  #elif [[ $auth_type=='none' ]]; then
-  elif [[ $password_exists=='no' ]]; then
-    TEXT='[!] PASSWORD AUTHENTICATION IS DISABLED!'; greentext
-  else
-    TEXT='[X] ERROR READING $configfile'; redtext
-  fi
   echo ''
 
 }
