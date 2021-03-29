@@ -60,7 +60,7 @@ Visit **http://127.0.0.1:8080** and enter your _password_ that you set in **Step
 
 ## screenshot here
 
-### Step 5: Further Setup and useful tweaks
+### Step 5: Access VS Code on other devices
 
 ## screenshot here
 

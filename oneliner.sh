@@ -248,7 +248,7 @@ instruct_user() {
   TEXT='[!] Then visit http://127.0.0.1:8080 from your browser'; yellowtext
   echo ''
   #if [[ $auth_type=='password' ]]; then
-  if [[ $password_exists=='yes' ]]; then
+  if [[ $password_exists=='yes' && $AUTHTYPE=='password' ]]; then
     TEXT='[!] Your Password is:'$SERVERPASS; greentext
   #elif [[ $auth_type=='none' ]]; then
   elif [[ $password_exists=='no' ]]; then
