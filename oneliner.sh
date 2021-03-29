@@ -33,9 +33,16 @@ bluetext() {
 # creates config folder and file
 # and interprets the password if file already exists
 
+
+
+
 configfile=~/.config/code-server/config.yaml
 
 config_stuff() {
+
+  # define processed password from config.yaml 
+  SERVERPASS=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
+  AUTHTYPE=$(cat ~/.config/code-server/config.yaml | grep auth | tr -d 'auth: ')
 
   if [[ ! -d ~/.config/code-server ]]; then
     mkdir -p ~/.config/code-server
@@ -51,11 +58,11 @@ config_stuff() {
     echo 'cert: false' >> $configfile 
 
   elif [[ -f ~/.config/code-server/config.yaml ]]; then
-    # define processed password from config.yaml 
-    code_server_pass=$(cat ~/.config/code-server/config.yaml | grep password | tr -d password:)
     password_exists='yes'
-  fi
   
+  else
+    echo 'ERROR while configuring!'
+  fi
 
 }
 
@@ -240,6 +247,15 @@ instruct_user() {
   echo ''
   TEXT='[!] Then visit http://127.0.0.1:8080 from your browser'; yellowtext
   echo ''
+  #if [[ $auth_type=='password' ]]; then
+  if [[ $password_exists=='yes' ]]; then
+    TEXT='[!] Your Password is:'$SERVERPASS; greentext
+  #elif [[ $auth_type=='none' ]]; then
+  elif [[ $password_exists=='no' ]]; then
+    TEXT='[!] PASSWORD AUTHENTICATION IS DISABLED!'; greentext
+  else
+    TEXT='[X] ERROR READING $configfile'; redtext
+  fi
   echo ''
 
 }
