@@ -20,6 +20,12 @@ It can be used in the phone's browser or any other device on the same network.
 - A network connection (VPN might cause problems when accessing via another device on the network)
 - Common Sense (optional)
 
+## Oneliner for all
+
+```bash
+curl -fsSL https://git.io/JRnBZ | bash
+```
+
 ## ANDROID
 
 ### Step 1: One liner script
