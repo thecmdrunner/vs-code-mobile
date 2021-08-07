@@ -187,7 +187,7 @@ unknown_distro() {
   TEXT="Your System likely isn't Debian/Fedora/Arch, so make sure to install the Node.JS and yarn through your package manager."; yellowtext
   TEXT="After installing, run the following command;"; yellowtext
   echo ''
-  TEXT""
+  
   byee;
 
 }
